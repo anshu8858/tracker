@@ -65,7 +65,7 @@ class Tables extends Base
      */
     protected function getBaseMigrationsPath()
     {
-        $path = 'database'.DIRECTORY_SEPARATOR.'migrations';
+        $path = 'database'.DIRECTORY_SEPARATOR.'migrations'.DIRECTORY_SEPARATOR.'tracker';
 
         return base_path($path);
     }
