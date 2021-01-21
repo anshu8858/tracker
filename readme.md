@@ -1,6 +1,6 @@
 # Laravel Stats Tracker
 
-[![Latest Stable Version](https://img.shields.io/packagist/v/pragmarx/tracker.svg?style=flat-square)](https://packagist.org/packages/pragmarx/tracker) [![License](https://img.shields.io/badge/license-BSD_3_Clause-brightgreen.svg?style=flat-square)](LICENSE) [![Downloads](https://img.shields.io/packagist/dt/pragmarx/tracker.svg?style=flat-square)](https://packagist.org/packages/pragmarx/tracker)
+[![Latest Stable Version](https://img.shields.io/packagist/v/anshu8858/tracker.svg?style=flat-square)](https://packagist.org/packages/anshu8858/tracker) [![License](https://img.shields.io/badge/license-BSD_3_Clause-brightgreen.svg?style=flat-square)](LICENSE) [![Downloads](https://img.shields.io/packagist/dt/anshu8858/tracker.svg?style=flat-square)](https://packagist.org/packages/anshu8858/tracker)
 
 ### Tracker gathers a lot of information from your requests to identify and store:
 
@@ -25,8 +25,6 @@
 
 - [Why?](#why)
 - [How To Use It](#usage)
-- [Screenshots](#screenshots)
-- [Blade Views](#views)
 - [Table Schemas](#how-data-is-stored)
 - [System Requirements](#requirements)
 - [Installing](#installing)
@@ -52,15 +50,10 @@ Most of those methods return an Eloquent model or collection, so you can use not
 
 ```php
 var_dump( $visitor->client_ip );
-
 var_dump( $visitor->device->is_mobile );
-
 var_dump( $visitor->device->platform );
-
 var_dump( $visitor->geoIp->city );
-
 var_dump( $visitor->language->preference );
-
 ```
 
 #### Sessions (visits)
@@ -73,13 +66,9 @@ $sessions = Tracker::sessions(60 * 24); // get sessions (visits) from the past d
 foreach ($sessions as $session)
 {
     var_dump( $session->user->email );
-
     var_dump( $session->device->kind . ' - ' . $session->device->platform );
-
     var_dump( $session->agent->browser . ' - ' . $session->agent->browser_version );
-
     var_dump( $session->geoIp->country_name );
-
     foreach ($session->session->log as $log)
     {
     	var_dump( $log->path );
@@ -139,7 +128,6 @@ You can send timestamp ranges to those methods using the Minutes class:
 $range = new Minutes();
 
 $range->setStart(Carbon::now()->subDays(2));
-
 $range->setEnd(Carbon::now()->subDays(1));
 
 Tracker::userDevices($range);
@@ -182,31 +170,6 @@ return Tracker::logByRouteName('tracker.stats.log')
         ->count('tracker_log.session_id');
 ```
 
-## Screenshots
-
-### Visits
-
-![visits](https://raw.githubusercontent.com/antonioribeiro/tracker/master/src/views/screenshots/visits.png)
-
-### Charts
-
-![charts](https://raw.githubusercontent.com/antonioribeiro/tracker/master/src/views/screenshots/summary.png)
-
-### Users
-
-![users](https://raw.githubusercontent.com/antonioribeiro/tracker/master/src/views/screenshots/users.png)
-
-### Events
-
-![events](https://raw.githubusercontent.com/antonioribeiro/tracker/master/src/views/screenshots/events.png)
-
-### Errors
-
-![errors](https://raw.githubusercontent.com/antonioribeiro/tracker/master/src/views/screenshots/errors.png)
-
-## Blade Views
-
-The views above are available in this package, but you need to install the `sb-admin` panel on your public folder, please look at the instructions below.
 
 ## How data is stored
 
@@ -248,11 +211,6 @@ All tables are prefixed by `tracker_`, and here's an extract of some of them, sh
 | 1  | Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.114 Safari/537.36                           | Chrome            | 35.0.1916       |
 | 2  | Mozilla/5.0 (iPad; CPU OS 7_1_1 like Mac OS X) AppleWebKit/537.51.1 (KHTML, like Gecko) CriOS/34.0.1847.18 Mobile/11D201 Safari/9537.53 | Chrome Mobile iOS | 34.0.1847       |
 | 3  | Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)                                                                                      | IE                | 6.0             |
-| 4  | Python-urllib/2.6                                                                                                                       | Other             |                 |
-| 5  | Other                                                                                                                                   | Other             |                 |
-| 6  | Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.137 Safari/537.36                           | Chrome            | 34.0.1847       |
-| 7  | Mozilla/5.0 (Windows NT 6.3; rv:28.0) Gecko/20100101 Firefox/28.0                                                                       | Firefox           | 28.0            |
-| 8  | Mozilla/5.0 (iPhone; CPU iPhone OS 7_1 like Mac OS X) AppleWebKit/537.51.2 (KHTML, like Gecko) Version/7.0 Mobile/11D169 Safari/9537.53 | Mobile Safari     | 7.0             |
 +----+-----------------------------------------------------------------------------------------------------------------------------------------+-------------------+-----------------+
 ```
 
@@ -291,9 +249,6 @@ All tables are prefixed by `tracker_`, and here's an extract of some of them, sh
 | 4  | 500  | syntax error, unexpected 'foreach' (T_FOREACH)                                                                                                                                                                               |
 | 5  | 500  | Call to undefined method PragmaRX\Tracker\Tracker::pageViewsByCountry()                                                                                                                                                      |
 | 6  | 500  | Class PragmaRX\Firewall\Vendor\Laravel\Artisan\Base contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (Illuminate\Console\Command::fire)                                 |
-| 7  | 405  |                                                                                                                                                                                                                              |
-| 8  | 500  | Trying to get property of non-object                                                                                                                                                                                         |
-| 9  | 500  | Missing argument 2 for Illuminate\Database\Eloquent\Model::setAttribute(), called in /home/forge/stage.antoniocarlosribeiro.com/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php on line 2444 and defined |
 +----+------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 ```
 
@@ -311,14 +266,6 @@ All tables are prefixed by `tracker_`, and here's an extract of some of them, sh
 | 6  | composing: admin.tracker.index                 |
 | 7  | creating: admin.tracker._partials.menu         |
 | 8  | composing: admin.tracker._partials.menu        |
-| 9  | creating: admin.layout                         |
-| 10 | composing: admin.layout                        |
-| 11 | creating: admin._partials.mainMenu             |
-| 12 | composing: admin._partials.mainMenu            |
-| 13 | creating: admin._partials.messages             |
-| 14 | composing: admin._partials.messages            |
-| 15 | creating: global._partials.google-analytics    |
-| 16 | composing: global._partials.google-analytics   |
 +----+------------------------------------------------+
 ```
 
@@ -334,32 +281,6 @@ All tables are prefixed by `tracker_`, and here's an extract of some of them, sh
 | 4  | 38.65    | -90.5334  | US           | USA           | United States             | MO     | Chesterfield   | 63017       | 314       | 609      | 609        | NA             |
 | 5  | 42.7257  | -84.636   | US           | USA           | United States             | MI     | Lansing        | 48917       | 517       | 551      | 551        | NA             |
 | 6  | 42.8884  | -78.8761  | US           | USA           | United States             | NY     | Buffalo        | 14202       | 716       | 514      | 514        | NA             |
-| 7  | 40.1545  | -75.3809  | US           | USA           | United States             | PA     | Norristown     | 19403       | 610       | 504      | 504        | NA             |
-| 8  | 47.4891  | -122.291  | US           | USA           | United States             | WA     | Seattle        | 98168       | 206       | 819      | 819        | NA             |
-| 9  | 33.7516  | -84.3915  | US           | USA           | United States             | GA     | Atlanta        | 30303       | 404       | 524      | 524        | NA             |
-| 10 | 33.7633  | -117.794  | US           | USA           | United States             | CA     | Santa Ana      | 92705       | 714       | 803      | 803        | NA             |
-| 11 | 33.4357  | -111.917  | US           | USA           | United States             | AZ     | Tempe          | 85281       | 480       | 753      | 753        | NA             |
-| 12 | 40.7421  | -74.0018  | US           | USA           | United States             | NY     | New York       | 10011       | 212       | 501      | 501        | NA             |
-| 13 | 28.6185  | -81.4336  | US           | USA           | United States             | FL     | Orlando        | 32810       | 407       | 534      | 534        | NA             |
-| 14 | 38.6312  | -90.1922  | US           | USA           | United States             | MO     | Saint Louis    | 63101       | 314       | 609      | 609        | NA             |
-| 15 | 51       | 9         | DE           | DEU           | Germany                   |        |                |             |           |          |            | EU             |
-| 16 | 52.5     | 5.75      | NL           | NLD           | Netherlands               |        |                |             |           |          |            | EU             |
-| 17 | 48.86    | 2.35      | FR           | FRA           | France                    |        |                |             |           |          |            | EU             |
-| 18 | 60       | 100       | RU           | RUS           | Russian Federation        |        |                |             |           |          |            | EU             |
-| 19 | 51.5     | -0.13     | GB           | GBR           | United Kingdom            |        |                |             |           |          |            | EU             |
-| 20 | 42.8333  | 12.8333   | IT           | ITA           | Italy                     |        |                |             |           |          |            | EU             |
-| 21 | 59.3333  | 18.05     | SE           | SWE           | Sweden                    | 26     | Stockholm      |             |           |          |            | EU             |
-| 22 | -41      | 174       | NZ           | NZL           | New Zealand               |        |                |             |           |          |            | OC             |
-| 23 | 37.57    | 126.98    | KR           | KOR           | Korea, Republic of        |        |                |             |           |          |            | AS             |
-| 24 | 1.3667   | 103.8     | SG           | SGP           | Singapore                 |        |                |             |           |          |            | AS             |
-| 25 | -43.5333 | 172.633   | NZ           | NZL           | New Zealand               | E9     | Christchurch   | 8023        |           |          |            | OC             |
-| 26 | -27.471  | 153.024   | AU           | AUS           | Australia                 | 04     | Brisbane       |             |           |          |            | OC             |
-| 27 | 26.9167  | 75.8167   | IN           | IND           | India                     | 24     | Jaipur         |             |           |          |            | AS             |
-| 28 | 32       | 53        | IR           | IRN           | Iran, Islamic Republic of |        |                |             |           |          |            | AS             |
-| 29 | 32.0617  | 118.778   | CN           | CHN           | China                     | 04     | Nanjing        |             |           |          |            | AS             |
-| 30 | -22.9    | -47.0833  | BR           | BRA           | Brazil                    | 27     | Campinas       |             |           |          |            | SA             |
-| 31 | 32.8073  | -117.132  | US           | USA           | United States             | CA     | San Diego      | 92123       | 858       | 825      | 825        | NA             |
-| 32 | -22.9    | -43.2333  | BR           | BRA           | Brazil                    | 21     | Rio De Janeiro |             |           |          |            | SA             |
 +----+----------+-----------+--------------+---------------+---------------------------+--------+----------------+-------------+-----------+----------+------------+----------------+
 ```
 
@@ -388,18 +309,6 @@ All tables are prefixed by `tracker_`, and here's an extract of some of them, sh
 | 4  | admin/languages                                        |
 | 5  | admin/tracker                                          |
 | 6  | admin/pages                                            |
-| 7  | jmx-console                                            |
-| 8  | manager/html                                           |
-| 9  | administrator                                          |
-| 10 | joomla/administrator                                   |
-| 11 | cms/administrator                                      |
-| 12 | Joomla/administrator                                   |
-| 13 | phpmyadmin                                             |
-| 14 | phpMyAdmin                                             |
-| 15 | mysql                                                  |
-| 16 | sql                                                    |
-| 17 | myadmin                                                |
-| 18 | webdav                                                 |
 +----+--------------------------------------------------------+
 ```
 
@@ -413,9 +322,6 @@ All tables are prefixed by `tracker_`, and here's an extract of some of them, sh
 | 2  | 2        | admin                                                  |
 | 3  | 3        | login                                                  |
 | 4  | 4        | login                                                  |
-| 5  | 5        | admin/languages                                        |
-| 6  | 6        | admin/tracker                                          |
-| 7  | 7        | admin/pages                                            |
 +----+----------+--------------------------------------------------------+
 ```
 
@@ -429,24 +335,12 @@ All tables are prefixed by `tracker_`, and here's an extract of some of them, sh
 | 2  | admin                                | ACR\Controllers\Admin\Admin@index                        |
 | 3  | login.form                           | ACR\Controllers\Logon@form                               |
 | 4  | login.do                             | ACR\Controllers\Logon@login                              |
-| 5  | admin.languages.index                | ACR\Controllers\Admin\Languages@index                    |
-| 6  | admin.tracker.index                  | ACR\Controllers\Admin\Tracker@index                      |
-| 7  | admin.pages.index                    | ACR\Controllers\Admin\Pages@index                        |
-| 8  | admin.tracker.log                    | ACR\Controllers\Admin\Tracker@log                        |
-| 9  | technology                           | ACR\Controllers\Technology@index                         |
-| 10 | technology.articles.show             | ACR\Controllers\Technology@show                          |
-| 11 | language.select                      | ACR\Controllers\Language@select                          |
-| 12 | admin.tracker.summary                | ACR\Controllers\Admin\Tracker@summary                    |
-| 13 | admin.tracker.api.pageviews          | ACR\Controllers\Admin\Tracker@apiPageviews               |
-| 14 | admin.tracker.api.pageviewsbycountry | ACR\Controllers\Admin\Tracker@apiPageviewsByCountry      |
-| 15 | admin.pages.create                   | ACR\Controllers\Admin\Pages@create                       |
-| 16 | api.markdown                         | ACR\Controllers\Api@markdown                             |
-| 17 | admin.pages.store                    | ACR\Controllers\Admin\Pages@store                        |
-| 18 | bio                                  | ACR\Controllers\StaticPages@show                         |
-| 19 | logout.do                            | ACR\Controllers\Logon@logout                             |
-| 20 | admin.tracker.index                  | ACR\Controllers\Admin\UsageTracker@index                 |
-| 21 | admin.tracker.api.pageviewsbycountry | ACR\Controllers\Admin\UsageTracker@apiPageviewsByCountry |
-| 22 | admin.tracker.api.pageviews          | ACR\Controllers\Admin\UsageTracker@apiPageviews          |
+| 5  | admin.languages.index                | ACR\Controllers\Admin\Pages@store                        |
+| 6 | bio                                  | ACR\Controllers\StaticPages@show                         |
+| 7 | logout.do                            | ACR\Controllers\Logon@logout                             |
+| 8 | admin.tracker.index                  | ACR\Controllers\Admin\UsageTracker@index                 |
+| 9 | admin.tracker.api.pageviewsbycountry | ACR\Controllers\Admin\UsageTracker@apiPageviewsByCountry |
+| 10 | admin.tracker.api.pageviews          | ACR\Controllers\Admin\UsageTracker@apiPageviews          |
 +----+--------------------------------------+----------------------------------------------------------+
 ```
 
@@ -486,12 +380,11 @@ Tracker::trackVisit(
 
 ## Requirements
 
-- Laravel 5+
-- PHP 5.3.7+
-- Package "geoip/geoip":"~1.14" or "geoip2/geoip2":"~2.0"
+- Laravel 7+, 8+
+- PHP 7.2+
+- Package "geoip/geoip":"~1.14" or "geoip2/geoip2":"~2.1"
   (If you are planning to store Geo IP information)
 
-For Laravel 4+ please use version 2.0.10.
 
 ## Installing
 
@@ -716,8 +609,8 @@ In your kernel
 
 ## Author
 
-[Antonio Carlos Ribeiro](http://twitter.com/iantonioribeiro)
-[All Contributors](https://github.com/antonioribeiro/tracker/graphs/contributors)
+[Antonio Carlos Ribeiro](https://twitter.com/anshu_kushawaha)
+[All Contributors](https://github.com/anshu8858/tracker/graphs/contributors)
 
 ## License
 
