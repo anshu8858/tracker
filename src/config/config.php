@@ -325,54 +325,6 @@ return [
     'authenticated_user_username_column' => 'email', // to Auth::user()->email
 
     /*
-     * Enable the Stats Panel?
-     */
-    'stats_panel_enabled' => false,
-
-    /*
-     * Stats Panel routes before filter
-     *
-     */
-    'stats_routes_before_filter' => '',
-
-    /*
-     * Stats Panel routes after filter
-     *
-     */
-    'stats_routes_after_filter' => '',
-
-    /*
-     * Stats Panel routes middleware
-     *
-     */
-    'stats_routes_middleware' => 'web',
-
-    /*
-     * Stats Panel template path
-     */
-    'stats_template_path' => '/templates/sb-admin-2',
-
-    /*
-     * Stats Panel base uri.
-     *
-     * If your site url is http://wwww.mysite.com, then your stats page will be:
-     *
-     *    http://wwww.mysite.com/stats
-     *
-     */
-    'stats_base_uri' => 'stats',
-
-    /*
-     * Stats Panel layout view
-     */
-    'stats_layout' => 'pragmarx/tracker::layout',
-
-    /*
-     * Stats Panel controllers namespace
-     */
-    'stats_controllers_namespace' => 'PragmaRX\Tracker\Vendor\Laravel\Controllers',
-
-    /*
      * Set a default user agent
      */
     'default_user_agent' => '',
