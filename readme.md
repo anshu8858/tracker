@@ -497,7 +497,7 @@ For Laravel 4+ please use version 2.0.10.
 
 #### Require the `tracker` package by **executing** the following command in your command line:
 
-    composer require pragmarx/tracker
+    composer require anshu8858/tracker
 
 #### Add the service provider to your app/config/app.php:
 
@@ -513,9 +513,7 @@ For Laravel 4+ please use version 2.0.10.
 
 #### Publish tracker configuration:
 
-**Laravel 4**
-
-    php artisan config:publish pragmarx/tracker
+    php artisan config:publish anshu8858/tracker
 
 **Laravel 5**
 
@@ -537,7 +535,7 @@ Open the file `app/Http/Kernel.php` and add the following to your web middleware
 \PragmaRX\Tracker\Vendor\Laravel\Middlewares\Tracker::class,
 ```
 
-#### Enable Tracker in your config.php (Laravel 4) or tracker.php (Laravel 5)
+#### Enable Tracker in your tracker.php (Laravel 5)
 
 ```php
 'enabled' => true,
@@ -607,7 +605,9 @@ You just have to all your auth IOC bidings to the array:
 'authentication_ioc_binding' => ['auth', 'admin'],
 ```
 
-## Stats Panel
+## Stats Panel (Deprecated)
+
+Very soon this option not available in future update.
 
 To use the stats panel on your website you'll need to download the sb-admin 2 sources to your public folder:
 
@@ -615,12 +615,6 @@ To use the stats panel on your website you'll need to download the sb-admin 2 so
     cd public/templates/sb-admin-2
     git checkout tags/v3.3.7+1
     git checkout -b v3.3.7+1
-
-And enabled in your config file:
-
-```php
-'stats_panel_enabled' => true,
-```
 
 Set the web middleware for stats routes (Laravel 5)
 
