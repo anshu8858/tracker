@@ -46,11 +46,8 @@ use PragmaRX\Tracker\Vendor\Laravel\Artisan\UpdateGeoIp;
 class ServiceProvider extends PragmaRXServiceProvider
 {
     protected $packageVendor = 'pragmarx';
-
     protected $packageName = 'tracker';
-
     protected $packageNameCapitalized = 'Tracker';
-
     protected $repositoryManagerIsBooted = false;
 
     /**
@@ -59,9 +56,7 @@ class ServiceProvider extends PragmaRXServiceProvider
      * @var bool
      */
     protected $defer = false;
-
     protected $userChecked = false;
-
     protected $tracker;
 
     /**
@@ -77,8 +72,7 @@ class ServiceProvider extends PragmaRXServiceProvider
             return false;
         }
 
-        $this->loadRoutes();
-
+        //$this->loadRoutes();
         $this->registerErrorHandler();
 
         if (!$this->getConfig('use_middleware')) {
@@ -109,30 +103,18 @@ class ServiceProvider extends PragmaRXServiceProvider
 
         if ($this->getConfig('enabled')) {
             $this->registerAuthentication();
-
             $this->registerCache();
-
             $this->registerRepositories();
-
             $this->registerTracker();
-
             $this->registerTablesCommand();
-
             $this->registerUpdateGeoIpCommand();
-
             $this->registerExecutionCallback();
-
             $this->registerUserCheckCallback();
-
             $this->registerSqlQueryLogWatcher();
-
             $this->registerGlobalEventLogger();
-
-            $this->registerDatatables();
-
+            //$this->registerDatatables();
             $this->registerMessageRepository();
-
-            $this->registerGlobalViewComposers();
+            //$this->registerGlobalViewComposers();
         }
     }
 
@@ -179,65 +161,42 @@ class ServiceProvider extends PragmaRXServiceProvider
             }
 
             $sessionModel = $this->instantiateModel('session_model');
-
             $logModel = $this->instantiateModel('log_model');
-
             $agentModel = $this->instantiateModel('agent_model');
-
             $deviceModel = $this->instantiateModel('device_model');
-
             $cookieModel = $this->instantiateModel('cookie_model');
-
             $pathModel = $this->instantiateModel('path_model');
-
             $queryModel = $this->instantiateModel('query_model');
-
             $queryArgumentModel = $this->instantiateModel('query_argument_model');
-
             $domainModel = $this->instantiateModel('domain_model');
-
             $refererModel = $this->instantiateModel('referer_model');
-
             $refererSearchTermModel = $this->instantiateModel('referer_search_term_model');
 
             $routeModel = $this->instantiateModel('route_model');
-
             $routePathModel = $this->instantiateModel('route_path_model');
-
             $routePathParameterModel = $this->instantiateModel('route_path_parameter_model');
 
             $errorModel = $this->instantiateModel('error_model');
-
             $geoipModel = $this->instantiateModel('geoip_model');
-
             $sqlQueryModel = $this->instantiateModel('sql_query_model');
-
             $sqlQueryBindingModel = $this->instantiateModel('sql_query_binding_model');
 
             $sqlQueryBindingParameterModel = $this->instantiateModel('sql_query_binding_parameter_model');
 
             $sqlQueryLogModel = $this->instantiateModel('sql_query_log_model');
-
             $connectionModel = $this->instantiateModel('connection_model');
-
             $eventModel = $this->instantiateModel('event_model');
-
             $eventLogModel = $this->instantiateModel('event_log_model');
-
             $systemClassModel = $this->instantiateModel('system_class_model');
-
             $languageModel = $this->instantiateModel('language_model');
-
             $logRepository = new Log($logModel);
 
             $connectionRepository = new Connection($connectionModel);
-
             $sqlQueryBindingRepository = new SqlQueryBinding($sqlQueryBindingModel);
 
             $sqlQueryBindingParameterRepository = new SqlQueryBindingParameter($sqlQueryBindingParameterModel);
 
             $sqlQueryLogRepository = new SqlQueryLog($sqlQueryLogModel);
-
             $sqlQueryRepository = new SqlQuery(
                 $sqlQueryModel,
                 $sqlQueryLogRepository,
@@ -249,9 +208,7 @@ class ServiceProvider extends PragmaRXServiceProvider
             );
 
             $eventLogRepository = new EventLog($eventLogModel);
-
             $systemClassRepository = new SystemClass($systemClassModel);
-
             $eventRepository = new Event(
                 $eventModel,
                 $app['tracker.events'],
@@ -278,10 +235,7 @@ class ServiceProvider extends PragmaRXServiceProvider
                 $app['tracker.authentication'],
                 $app['session.store'],
                 $app['tracker.config'],
-                new Session(
-                    $sessionModel,
-                    $app['tracker.config'],
-                    new PhpSession()
+                new Session($sessionModel,$app['tracker.config'], new PhpSession()
                 ),
                 $logRepository,
                 new Path($pathModel),
@@ -289,19 +243,9 @@ class ServiceProvider extends PragmaRXServiceProvider
                 new QueryArgument($queryArgumentModel),
                 new Agent($agentModel),
                 new Device($deviceModel),
-                new Cookie(
-                    $cookieModel,
-                    $app['tracker.config'],
-                    $app['request'],
-                    $app['cookie']
-                ),
+                new Cookie($cookieModel,$app['tracker.config'],$app['request'],$app['cookie']),
                 new Domain($domainModel),
-                new Referer(
-                    $refererModel,
-                    $refererSearchTermModel,
-                    $this->getAppUrl(),
-                    $app->make('PragmaRX\Tracker\Support\RefererParser')
-                ),
+                new Referer($refererModel,$refererSearchTermModel,$this->getAppUrl(),$app->make('PragmaRX\Tracker\Support\RefererParser')),
                 $routeRepository,
                 new RoutePath($routePathModel),
                 new RoutePathParameter($routePathParameterModel),
@@ -384,17 +328,13 @@ class ServiceProvider extends PragmaRXServiceProvider
     protected function instantiateModel($modelName)
     {
         $model = $this->getConfig($modelName);
-
         if (!$model) {
             $message = "Tracker: Model not found for '$modelName'.";
-
             $this->app['log']->error($message);
-
             throw new \Exception($message);
         }
 
         $model = new $model();
-
         $model->setConfig($this->app['tracker.config']);
 
         if ($connection = $this->getConfig('connection')) {
@@ -479,6 +419,7 @@ class ServiceProvider extends PragmaRXServiceProvider
         });
     }
 
+    /*
     protected function loadRoutes()
     {
         if (!$this->getConfig('stats_panel_enabled')) {
@@ -486,7 +427,6 @@ class ServiceProvider extends PragmaRXServiceProvider
         }
 
         $prefix = $this->getConfig('stats_base_uri');
-
         $namespace = $this->getConfig('stats_controllers_namespace');
 
         $filters = [];
@@ -529,6 +469,7 @@ class ServiceProvider extends PragmaRXServiceProvider
             });
         });
     }
+    
 
     protected function registerDatatables()
     {
@@ -536,6 +477,8 @@ class ServiceProvider extends PragmaRXServiceProvider
 
         $this->registerServiceAlias('Datatable', 'Bllim\Datatables\Facade\Datatables');
     }
+
+    */
 
     /**
      * Get the current package directory.
@@ -557,7 +500,7 @@ class ServiceProvider extends PragmaRXServiceProvider
 
     /**
      * Register global view composers.
-     */
+     
     protected function registerGlobalViewComposers()
     {
         $me = $this;
@@ -570,6 +513,8 @@ class ServiceProvider extends PragmaRXServiceProvider
             $view->with('stats_template_path', $template_path);
         });
     }
+
+    */
 
     protected function registerUpdateGeoIpCommand()
     {
