@@ -21,20 +21,15 @@ class Tracker
      * @var \Illuminate\Routing\Router
      */
     protected $route;
-
     protected $logger;
 
     /**
      * @var \Illuminate\Foundation\Application
      */
     protected $laravel;
-
     protected $enabled = true;
-
     protected $sessionData;
-
     protected $loggedItems = [];
-
     protected $booted = false;
 
     /**
@@ -52,17 +47,11 @@ class Tracker
         MessageRepository $messageRepository
     ) {
         $this->config = $config;
-
         $this->dataRepositoryManager = $dataRepositoryManager;
-
         $this->request = $request;
-
         $this->route = $route;
-
         $this->logger = $logger;
-
         $this->laravel = $laravel;
-
         $this->messageRepository = $messageRepository;
     }
 

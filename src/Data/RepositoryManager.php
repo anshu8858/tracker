@@ -37,110 +37,31 @@ use PragmaRX\Tracker\Support\MobileDetect;
 
 class RepositoryManager implements RepositoryManagerInterface
 {
-    /**
-     * @var Path
-     */
     private $pathRepository;
-
-    /**
-     * @var Query
-     */
     private $queryRepository;
-
-    /**
-     * @var QueryArgument
-     */
     private $queryArgumentRepository;
-
-    /**
-     * @var Domain
-     */
     private $domainRepository;
-
-    /**
-     * @var Referer
-     */
     private $refererRepository;
-
-    /**
-     * @var Repositories\Route
-     */
     private $routeRepository;
-
-    /**
-     * @var Repositories\RoutePath
-     */
     private $routePathRepository;
-
-    /**
-     * @var Repositories\RoutePathParameter
-     */
     private $routePathParameterRepository;
-
-    /**
-     * @var Error
-     */
     private $errorRepository;
-
-    /**
-     * @var GeoIP
-     */
     private $geoIp;
 
     private $geoIpRepository;
-
-    /**
-     * @var Repositories\SqlQuery
-     */
     private $sqlQueryRepository;
-
-    /**
-     * @var Repositories\SqlQueryBinding
-     */
     private $sqlQueryBindingRepository;
-
-    /**
-     * @var Repositories\SqlQueryLog
-     */
     private $sqlQueryLogRepository;
 
     private $sqlQueryBindingParameterRepository;
-
-    /**
-     * @var Repositories\Connection
-     */
     private $connectionRepository;
-
-    /**
-     * @var Repositories\Event
-     */
     private $eventRepository;
-
-    /**
-     * @var Repositories\EventLog
-     */
     private $eventLogRepository;
-
-    /**
-     * @var Repositories\SystemClass
-     */
     private $systemClassRepository;
 
     private $userAgentParser;
-
-    /**
-     * @var CrawlerDetector
-     */
     private $crawlerDetector;
-
-    /**
-     * @var Repositories\Language
-     */
     private $languageRepository;
-
-    /**
-     * @var Repositories\Language
-     */
     private $languageDetect;
 
     /**
@@ -181,67 +102,37 @@ class RepositoryManager implements RepositoryManagerInterface
         LanguageDetect $languageDetect
     ) {
         $this->authentication = $authentication;
-
         $this->mobileDetect = $mobileDetect;
-
         $this->userAgentParser = $userAgentParser;
-
         $this->session = $session;
-
         $this->config = $config;
-
         $this->geoIp = $geoIp;
-
         $this->sessionRepository = $sessionRepository;
-
         $this->logRepository = $logRepository;
-
         $this->pathRepository = $pathRepository;
-
         $this->queryRepository = $queryRepository;
-
         $this->queryArgumentRepository = $queryArgumentRepository;
-
         $this->agentRepository = $agentRepository;
-
         $this->deviceRepository = $deviceRepository;
-
         $this->cookieRepository = $cookieRepository;
-
         $this->domainRepository = $domainRepository;
-
         $this->refererRepository = $refererRepository;
-
         $this->routeRepository = $routeRepository;
-
         $this->routePathRepository = $routePathRepository;
-
         $this->routePathParameterRepository = $routePathParameterRepository;
-
         $this->errorRepository = $errorRepository;
-
         $this->geoIpRepository = $geoIpRepository;
-
         $this->sqlQueryRepository = $sqlQueryRepository;
-
         $this->sqlQueryBindingRepository = $sqlQueryBindingRepository;
-
         $this->sqlQueryBindingParameterRepository = $sqlQueryBindingParameterRepository;
 
         $this->sqlQueryLogRepository = $sqlQueryLogRepository;
-
         $this->connectionRepository = $connectionRepository;
-
         $this->eventRepository = $eventRepository;
-
         $this->eventLogRepository = $eventLogRepository;
-
         $this->systemClassRepository = $systemClassRepository;
-
         $this->crawlerDetector = $crawlerDetector;
-
         $this->languageRepository = $languageRepository;
-
         $this->languageDetect = $languageDetect;
     }
 
@@ -349,11 +240,8 @@ class RepositoryManager implements RepositoryManagerInterface
     {
         return [
             'name' => $name = $this->getCurrentUserAgent() ?: 'Other',
-
             'browser' => $this->userAgentParser->userAgent->family,
-
             'browser_version' => $this->userAgentParser->getUserAgentVersion(),
-
             'name_hash' => hash('sha256', $name),
         ];
     }
@@ -362,7 +250,6 @@ class RepositoryManager implements RepositoryManagerInterface
     {
         if ($properties = $this->getDevice()) {
             $properties['platform'] = $this->getOperatingSystemFamily();
-
             $properties['platform_version'] = $this->getOperatingSystemVersion();
         }
 
@@ -404,7 +291,6 @@ class RepositoryManager implements RepositoryManagerInterface
     {
         if ($languages = $this->getLanguage()) {
             $languages['preference'] = $this->languageDetect->getLanguagePreference();
-
             $languages['language-range'] = $this->languageDetect->getLanguageRange();
         }
 
@@ -481,7 +367,6 @@ class RepositoryManager implements RepositoryManagerInterface
             }
 
             $parts = explode('.', $url['host']);
-
             $domain = array_pop($parts);
 
             if (count($parts) > 0) {
@@ -489,7 +374,7 @@ class RepositoryManager implements RepositoryManagerInterface
             }
 
             $domain_id = $this->getDomainId($domain);
-
+            
             return $this->refererRepository->store($referer, $url['host'], $domain_id);
         }
     }
