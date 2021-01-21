@@ -408,11 +408,11 @@ Tracker::trackVisit(
 
     php artisan config:publish anshu8858/tracker
 
-**Laravel 5**
+**Laravel 7**
 
     php artisan vendor:publish --provider="PragmaRX\Tracker\Vendor\Laravel\ServiceProvider"
 
-#### Enable the Middleware (Laravel 5)
+#### Enable the Middleware (Laravel 7)
 
 Open the newly published config file found at `app/config/tracker.php` and enable `use_middleware`:
 
@@ -420,7 +420,7 @@ Open the newly published config file found at `app/config/tracker.php` and enabl
 'use_middleware' => true,
 ```
 
-#### Add the Middleware to Laravel Kernel (Laravel 5)
+#### Add the Middleware to Laravel Kernel (Laravel 7)
 
 Open the file `app/Http/Kernel.php` and add the following to your web middlewares:
 
@@ -428,7 +428,7 @@ Open the file `app/Http/Kernel.php` and add the following to your web middleware
 \PragmaRX\Tracker\Vendor\Laravel\Middlewares\Tracker::class,
 ```
 
-#### Enable Tracker in your tracker.php (Laravel 5)
+#### Enable Tracker in your tracker.php (Laravel 7)
 
 ```php
 'enabled' => true,
@@ -438,7 +438,7 @@ Open the file `app/Http/Kernel.php` and add the following to your web middleware
 
     php artisan tracker:tables
 
-This is only needed if you are on Laravel 4, because `vendor:publish` does it for you in Laravel 5.
+`vendor:publish` does it for you in Laravel 7.
 
 #### Create a database connection for it on your `config/database.php`
 
@@ -498,33 +498,6 @@ You just have to all your auth IOC bidings to the array:
 'authentication_ioc_binding' => ['auth', 'admin'],
 ```
 
-## Stats Panel (Deprecated)
-
-Very soon this option not available in future update.
-
-To use the stats panel on your website you'll need to download the sb-admin 2 sources to your public folder:
-
-    git clone https://github.com/BlackrockDigital/startbootstrap-sb-admin-2.git public/templates/sb-admin-2
-    cd public/templates/sb-admin-2
-    git checkout tags/v3.3.7+1
-    git checkout -b v3.3.7+1
-
-Set the web middleware for stats routes (Laravel 5)
-
-```php
-'stats_routes_middleware' => 'web',
-```
-
-Only admins can view the stats, so if you don't have an is_admin attribute on your user model, you'll have to add one:
-
-```php
-public function getIsAdminAttribute()
-{
-    return true;
-}
-```
-
-It can be 'admin', 'is_admin', 'root' or 'is_root'.
 
 ## Troubleshooting
 
