@@ -470,7 +470,7 @@ Otherwise you'll have to
 
     or
 
-    composer require "geoip2/geoip2":"~2.0"
+    composer require "geoip2/geoip2":"~2.1"
 
 #### And make sure you don't have the PHP module installed. This is a Debian/Ubuntu example:
 
