@@ -19,7 +19,7 @@
         "ramsey/uuid": "^4",
         "jenssegers/agent": "~2.6",
         "ua-parser/uap-php" : "~3.4",
-        "snowplow/referer-parser": "dev-master",
+        "snowplow/referer-parser": "~0.1",
         "jaybizzle/crawler-detect": "~1.2",
         "psr/log": "~1.0"
     },
