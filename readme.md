@@ -406,10 +406,6 @@ Tracker::trackVisit(
 
 #### Publish tracker configuration:
 
-    php artisan config:publish anshu8858/tracker
-
-**Laravel 7**
-
     php artisan vendor:publish --provider="PragmaRX\Tracker\Vendor\Laravel\ServiceProvider"
 
 #### Enable the Middleware (Laravel 7)
