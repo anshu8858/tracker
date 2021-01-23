@@ -89,9 +89,7 @@ class Base extends Command
         }
 
         $this->table = $this->getHelperSet()->get('table');
-
         $this->table->setHeaders($headers)->setRows($rows);
-
         $this->table->render($this->getOutput());
     }
 
