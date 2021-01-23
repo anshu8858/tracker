@@ -434,6 +434,10 @@ Open the file `app/Http/Kernel.php` and add the following to your web middleware
 
     php artisan tracker:tables
 
+Often you need this
+
+    php artisan migrate --database=tracker  --path=/database/migrations/tracker/
+
 `vendor:publish` does it for you in Laravel 7.
 
 #### Create a database connection for it on your `config/database.php`
