@@ -8,13 +8,11 @@ use Symfony\Component\Console\Application;
 class Base extends Eloquent
 {
     protected $hidden = ['config'];
-
     private $config;
 
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
-
         $this->setConnection($this->getConfig()->get('connection'));
     }
 
@@ -32,7 +30,6 @@ class Base extends Eloquent
     public function save(array $options = [])
     {
         parent::save($options);
-
         app('tracker.cache')->makeKeyAndPut($this, $this->getKeyName());
     }
 

@@ -13,9 +13,7 @@ class Session
     public function __construct()
     {
         LaravelSession::put('tracker.stats.days', $this->getValue('days', 1));
-
         LaravelSession::put('tracker.stats.page', $this->getValue('page', 'visits'));
-
         $this->minutes = new Minutes(60 * 24 * LaravelSession::get('tracker.stats.days'));
     }
 
