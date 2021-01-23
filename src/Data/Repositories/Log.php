@@ -5,7 +5,6 @@ namespace PragmaRX\Tracker\Data\Repositories;
 class Log extends Repository
 {
     protected $currentLogId;
-
     protected $route_path_id;
 
     public function updateRoute($route_path_id = null)
@@ -40,9 +39,7 @@ class Log extends Repository
 
     public function bySession($sessionId, $results = true)
     {
-        $query = $this
-                    ->getModel()
-                    ->where('session_id', $sessionId)->orderBy('updated_at', 'desc');
+        $query = $this->getModel()->where('session_id', $sessionId)->orderBy('updated_at', 'desc');
 
         if ($results) {
             return $query->get();
@@ -72,9 +69,7 @@ class Log extends Repository
     public function createLog($data)
     {
         $log = $this->create($data);
-
         $this->updateRoute();
-
         return $this->setCurrentLogId($log->id);
     }
 
@@ -101,7 +96,6 @@ class Log extends Repository
     public function delete()
     {
         $this->currentLogId = null;
-
         $this->getModel()->delete();
     }
 }

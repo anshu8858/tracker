@@ -50,15 +50,10 @@ class SqlQuery extends Repository
         parent::__construct($model);
 
         $this->sqlQueryLogRepository = $sqlQueryLogRepository;
-
         $this->sqlQueryBindingRepository = $sqlQueryBindingRepository;
-
         $this->sqlQueryBindingParameterRepository = $sqlQueryBindingParameterRepository;
-
         $this->connectionRepository = $connectionRepository;
-
         $this->logRepository = $logRepository;
-
         $this->config = $config;
     }
 
@@ -88,18 +83,14 @@ class SqlQuery extends Repository
     public function push($query)
     {
         $this->queries[] = $query;
-
         $this->fire();
     }
 
     private function logQuery($query)
     {
         $sqlQuery = htmlentities($query['query']);
-
         $bindings = $query['bindings'];
-
         $time = $query['time'];
-
         $name = $query['name'];
 
         if (!$this->sqlQueryIsLoggable($sqlQuery)) {
@@ -139,7 +130,6 @@ class SqlQuery extends Repository
                             // unfortunately laravel uses question marks,
                             // but hopefully someday this will change
                             'name'                  => '?',
-
                             'value'                 => $value,
                         ]
                     );

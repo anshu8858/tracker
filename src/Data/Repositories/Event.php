@@ -41,15 +41,11 @@ class Event extends Repository
         Config $config
     ) {
         parent::__construct($model);
-
+        
         $this->eventStorage = $eventStorage;
-
         $this->eventLogRepository = $eventLogRepository;
-
         $this->systemClassRepository = $systemClassRepository;
-
         $this->logRepository = $logRepository;
-
         $this->config = $config;
     }
 

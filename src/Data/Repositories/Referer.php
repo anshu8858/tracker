@@ -31,9 +31,7 @@ class Referer extends Repository
         parent::__construct($model);
 
         $this->refererParser = $refererParser;
-
         $this->currentUrl = $currentUrl;
-
         $this->searchTermModel = $searchTermModel;
     }
 
@@ -59,9 +57,7 @@ class Referer extends Repository
 
         if ($parsed->isKnown()) {
             $attributes['medium'] = $parsed->getMedium();
-
             $attributes['source'] = $parsed->getSource();
-
             $attributes['search_terms_hash'] = sha1($parsed->getSearchTerm());
         }
 

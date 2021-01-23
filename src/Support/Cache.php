@@ -10,13 +10,11 @@ use PragmaRX\Support\Config as Config;
 class Cache
 {
     private $app;
-
     private $config;
 
     public function __construct(Config $config, Application $app)
     {
         $this->config = $config;
-
         $this->app = $app;
     }
 
@@ -78,7 +76,6 @@ class Cache
     public function makeKeyAndPut($model, $key)
     {
         $key = $this->makeCacheKey($model, $key, get_class($model));
-
         $this->cachePut($key, $model);
     }
 

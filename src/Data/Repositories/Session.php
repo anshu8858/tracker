@@ -10,19 +10,14 @@ use Ramsey\Uuid\Uuid as UUID;
 class Session extends Repository
 {
     private $config;
-
     private $session;
-
     private $sessionInfo;
-
     protected $relations = ['device', 'user', 'log', 'language', 'agent', 'referer', 'geoIp', 'cookie'];
 
     public function __construct($model, Config $config, PhpSession $session)
     {
         $this->config = $config;
-
         $this->session = $session;
-
         parent::__construct($model);
     }
 
@@ -42,7 +37,6 @@ class Session extends Repository
     public function getCurrentId($sessionInfo)
     {
         $this->setSessionData($sessionInfo);
-
         return $this->sessionGetId($sessionInfo);
     }
 
@@ -97,9 +91,7 @@ class Session extends Repository
             $this->sessionSetId($this->findOrCreate($this->sessionInfo, ['uuid']));
         } else {
             $session = $this->find($this->getSessionData('id'));
-
             $session->updated_at = Carbon::now();
-
             $session->save();
 
             $this->sessionInfo['id'] = $this->getSessionData('id');
@@ -141,7 +133,6 @@ class Session extends Repository
                 }
 
                 $model->setAttribute($key, $value);
-
                 $model->save();
 
                 $wasComplete = false;
@@ -187,7 +178,6 @@ class Session extends Repository
 
         if (!$data) {
             $this->resetSessionUuid($data);
-
             $this->sessionIsKnownOrCreateSession();
         }
 
@@ -237,14 +227,11 @@ class Session extends Repository
 
         if ($returnResults) {
             $cacheKey = 'last-sessions';
-
             $result = $this->cache->findCachedWithKey($cacheKey);
 
             if (!$result) {
                 $result = $query->get();
-
                 $this->cache->cachePut($cacheKey, $result, 1); // cache only for 1 minute
-
                 return $result;
             }
 
@@ -318,13 +305,10 @@ class Session extends Repository
     private function resetSessionUuid($data = null)
     {
         $this->sessionInfo['uuid'] = null;
-
         $data = $data ?: $this->sessionInfo;
-
         unset($data['uuid']);
-
+        
         $this->putSessionData($data);
-
         $this->checkSessionUuid();
 
         return $data;

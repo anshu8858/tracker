@@ -5,15 +5,10 @@ namespace PragmaRX\Tracker\Data\Repositories;
 abstract class Repository implements RepositoryInterface
 {
     protected $builder;
-
     protected $model;
-
     protected $result;
-
     protected $connection;
-
     protected $className;
-
     protected $relations;
 
     /**
@@ -24,27 +19,21 @@ abstract class Repository implements RepositoryInterface
     public function __construct($model)
     {
         $this->model = $model;
-
         $this->className = get_class($model);
-
         $this->connection = $this->getModel()->getConnectionName();
-
         $this->cache = app('tracker.cache');
     }
 
     public function where($key, $operation, $value = null)
     {
         $this->builder = $this->builder ?: $this->newQuery();
-
         $this->builder = $this->builder->where($key, $operation, $value = null);
-
         return $this;
     }
 
     public function first()
     {
         $this->result = $this->builder->first();
-
         return $this->result ? $this : null;
     }
 
