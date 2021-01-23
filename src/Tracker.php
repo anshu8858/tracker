@@ -5,9 +5,11 @@ namespace PragmaRX\Tracker;
 use Illuminate\Foundation\Application as Laravel;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
+
 use PragmaRX\Support\Config;
 use PragmaRX\Support\GeoIp\Updater as GeoIpUpdater;
 use PragmaRX\Support\IpAddress;
+
 use PragmaRX\Tracker\Data\RepositoryManager as DataRepositoryManager;
 use PragmaRX\Tracker\Repositories\Message as MessageRepository;
 use PragmaRX\Tracker\Support\Minutes;
@@ -467,7 +469,6 @@ class Tracker
         // we till need to store data from the request.
         else {
             $this->turnOff();
-
             $this->deleteCurrentLog();
         }
     }
@@ -543,9 +544,7 @@ class Tracker
     public function updateGeoIp()
     {
         $updater = new GeoIpUpdater();
-
         $success = $updater->updateGeoIpFiles($this->config->get('geoip_database_path'));
-
         $this->messageRepository->addMessage($updater->getMessages());
 
         return $success;

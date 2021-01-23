@@ -1,26 +1,11 @@
 <?php
-
 return [
 
-    /*
-     * Enable it?
-     */
     'enabled' => false,
 
-    /*
-     * Enable cache?
-     */
-    'cache_enabled' => true,
-
-    /*
-     * Deffer booting for middleware use
-     */
-    'use_middleware' => false,
-
-    /*
-     * Robots should be tracked?
-     */
-    'do_not_track_robots' => false,
+    'cache_enabled' => true, /* Enable cache? */
+    'use_middleware' => false, /* Deffer booting for middleware use */
+    'do_not_track_robots' => false, /* Robots should be tracked? */
 
     /*
      * Which environments are not trackable?
@@ -78,14 +63,10 @@ return [
      */
     'log_enabled' => false,
 
-    /*
-     * Log artisan commands?
-     */
-    'console_log_enabled' => false,
+    'console_log_enabled' => false, /* Log artisan commands? */
 
     /*
      * Log SQL queries?
-     *
      * Log must be enabled for this option to work.
      */
     'log_sql_queries' => false,
@@ -117,26 +98,19 @@ return [
 
     /*
      * GeoIp2 database path.
-     *
      * To get a fresh version of this file, use the command
-     *
-     *      php artisan tracker:updategeoip
-     *
+     *      "php artisan tracker:updategeoip"
      */
 
     'geoip_database_path' => __DIR__.'/geoip', //storage_path('geoip'),
 
     /*
      * Also log SQL query bindings?
-     *
      * Log must be enabled for this option to work.
      */
     'log_sql_queries_bindings' => false,
 
-    /*
-     * Log events?
-     */
-    'log_events' => false,
+    'log_events' => false, /* Log events? */
 
     /*
      * Which events do you want to log exactly?
@@ -171,62 +145,23 @@ return [
 
     /*
      * Do you wish to log Geo IP data?
-     *
      * You will need to install the geoip package
-     *
      *     composer require "geoip/geoip":"~1.14"
      *
      * And remove the PHP module
-     *
      *     sudo apt-get purge php5-geoip
-     *
      */
     'log_geoip' => false,
 
-    /*
-     * Do you wish to log the user agent?
-     */
-    'log_user_agents' => false,
-
-    /*
-     * Do you wish to log your users?
-     */
-    'log_users' => false,
-
-    /*
-     * Do you wish to log devices?
-     */
-    'log_devices' => false,
-
-    /*
-     * Do you wish to log languages?
-     */
-    'log_languages' => false,
-
-    /*
-     * Do you wish to log HTTP referers?
-     */
-    'log_referers' => false,
-
-    /*
-     * Do you wish to log url paths?
-     */
-    'log_paths' => false,
-
-    /*
-     * Do you wish to log url queries and query arguments?
-     */
-    'log_queries' => false,
-
-    /*
-     * Do you wish to log routes and route parameters?
-     */
-    'log_routes' => false,
-
-    /*
-     * Log errors and exceptions?
-     */
-    'log_exceptions' => false,
+    'log_user_agents' => false, /* Do you wish to log the user agent? */
+    'log_users' => false, /* Do you wish to log your users? */
+    'log_devices' => false, /* Do you wish to log devices? */
+    'log_languages' => false, /* Do you wish to log languages? */
+    'log_referers' => false, /* Do you wish to log HTTP referers? */
+    'log_paths' => false, /* Do you wish to log url paths? */
+    'log_queries' => false, /* Do you wish to log url queries and query arguments? */
+    'log_routes' => false, /* Do you wish to log routes and route parameters? */
+    'log_exceptions' => false, /* Log errors and exceptions? */
 
     /*
      * A cookie may be created on your visitor device, so you can have information
@@ -260,53 +195,29 @@ return [
      */
 
     'session_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\Session',
-
     'log_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\Log',
-
     'path_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\Path',
-
     'query_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\Query',
-
     'query_argument_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\QueryArgument',
-
     'agent_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\Agent',
-
     'device_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\Device',
-
     'cookie_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\Cookie',
-
     'domain_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\Domain',
-
     'referer_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\Referer',
-
     'referer_search_term_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\RefererSearchTerm',
-
     'route_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\Route',
-
     'route_path_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\RoutePath',
-
     'route_path_parameter_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\RoutePathParameter',
-
     'error_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\Error',
-
     'geoip_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\GeoIp',
-
     'sql_query_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\SqlQuery',
-
     'sql_query_binding_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\SqlQueryBinding',
-
     'sql_query_binding_parameter_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\SqlQueryBindingParameter',
-
     'sql_query_log_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\SqlQueryLog',
-
     'connection_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\Connection',
-
     'event_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\Event',
-
     'event_log_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\EventLog',
-
     'system_class_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\SystemClass',
-
     'language_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\Language',
 
     /*
@@ -315,15 +226,11 @@ return [
     'authentication_ioc_binding' => ['auth'], // defaults to 'auth' in Illuminate\Support\Facades\Auth
 
     'authentication_guards' => [], // defaults to []
-
     'authenticated_check_method' => 'check', // to Auth::check()
-
     'authenticated_user_method' => 'user', // to Auth::user()
-
     'authenticated_user_id_column' => 'id', // to Auth::user()->id
-
     'authenticated_user_username_column' => 'email', // to Auth::user()->email
-
+    
     /*
      * Set a default user agent
      */
